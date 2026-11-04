@@ -1,0 +1,13 @@
+public class DLanciaRocce extends Drago {
+    private float pesoRocce;
+
+    public DLanciaRocce(int idDrago, String nome, String posizione, float pesoRocce) {
+        super(idDrago, nome, posizione);
+        this.pesoRocce = pesoRocce;
+    }
+
+    @Override
+    public void usaPotereMicidiale() {
+        System.out.println(nome + " lancia rocce pesanti " + pesoRocce + " kg!");
+    }
+}
