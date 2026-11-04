@@ -1,0 +1,13 @@
+public class DSputaFuoco extends Drago {
+    private float temperaturaFiamme;
+
+    public DSputaFuoco(int idDrago, String nome, String posizione, float temperaturaFiamme) {
+        super(idDrago, nome, posizione);
+        this.temperaturaFiamme = temperaturaFiamme;
+    }
+
+    @Override
+    public void usaPotereMicidiale() {
+        System.out.println(nome + " sputa fuoco a una temperatura di " + temperaturaFiamme + "°C!");
+    }
+}
