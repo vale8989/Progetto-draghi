@@ -1,0 +1,29 @@
+public abstract class Drago {
+    protected int idDrago;
+    protected String nome;
+    protected String posizione;
+    protected boolean statoVivo; // true = vivo, false = morto
+    
+    protected Principessa principessa; // 0..1 principessa imprigionata
+    protected Cavaliere cavaliereUccisore; // 1 cavaliere che lo ha ucciso
+
+    public Drago(int idDrago, String nome, String posizione) {
+        this.idDrago = idDrago;
+        this.nome = nome;
+        this.posizione = posizione;
+        this.statoVivo = true;
+    }
+
+    public abstract void usaPotereMicidiale();
+
+    public void catturaPrincipessa(Principessa p) {
+        this.principessa = p;
+        p.setDragoImprigionato(this);
+    }
+
+    // Getter e Setter
+    public boolean isStatoVivo() { return statoVivo; }
+    public void setStatoVivo(boolean statoVivo) { this.statoVivo = statoVivo; }
+    public Cavaliere getCavaliereUccisore() { return cavaliereUccisore; }
+    public void setCavaliereUccisore(Cavaliere cavaliereUccisore) { this.cavaliereUccisore = cavaliereUccisore; }
+}
