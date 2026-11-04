@@ -1,0 +1,13 @@
+public class DSputaGhiaccio extends Drago {
+    private float raggioGhiaccio;
+
+    public DSputaGhiaccio(int idDrago, String nome, String posizione, float raggioGhiaccio) {
+        super(idDrago, nome, posizione);
+        this.raggioGhiaccio = raggioGhiaccio;
+    }
+
+    @Override
+    public void usaPotereMicidiale() {
+        System.out.println(nome + " sputa un raggio di ghiaccio di " + raggioGhiaccio + " metri!");
+    }
+}
