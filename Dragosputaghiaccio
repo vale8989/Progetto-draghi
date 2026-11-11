@@ -1,13 +1,33 @@
-public class DSputaGhiaccio extends Drago {
-    private float raggioGhiaccio;
+public class D_SputaGhiaccio extends Drago {
+    private Principessa principessaDaCatturare;
 
-    public DSputaGhiaccio(int idDrago, String nome, String posizione, float raggioGhiaccio) {
-        super(idDrago, nome, posizione);
-        this.raggioGhiaccio = raggioGhiaccio;
+    public D_SputaGhiaccio(String nome, Principessa principessa) {
+        super(nome);
+        this.principessaDaCatturare = principessa;
     }
 
     @Override
     public void usaPotereMicidiale() {
-        System.out.println(nome + " sputa un raggio di ghiaccio di " + raggioGhiaccio + " metri!");
+        System.out.println(nome + " spara un raggio gelido!");
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; (i < 5) && !Thread.interrupted(); i++) {
+            double tentativo = Math.random();
+            if (tentativo > 0.5) {
+                boolean catturata = principessaDaCatturare.tentaCattura(this);
+                if (catturata) {
+                    System.out.println("❄️ " + this.getNome() + " ha catturato la principessa " + principessaDaCatturare.getNome() + "!");
+                }
+            }
+            System.out.println(this.getNome() + " sputa ghiaccio e si libra nell'aria! Gioia immensa, al battito " + (1 + i));
+            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }
