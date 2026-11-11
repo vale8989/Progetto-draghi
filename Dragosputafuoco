@@ -1,13 +1,33 @@
-public class DSputaFuoco extends Drago {
-    private float temperaturaFiamme;
+public class D_SputaFuoco extends Drago {
+    private Principessa principessaDaCatturare;
 
-    public DSputaFuoco(int idDrago, String nome, String posizione, float temperaturaFiamme) {
-        super(idDrago, nome, posizione);
-        this.temperaturaFiamme = temperaturaFiamme;
+    public D_SputaFuoco(String nome, Principessa principessa) {
+        super(nome);
+        this.principessaDaCatturare = principessa;
     }
 
     @Override
     public void usaPotereMicidiale() {
-        System.out.println(nome + " sputa fuoco a una temperatura di " + temperaturaFiamme + "°C!");
+        System.out.println(nome + " spusa fiamme ardenti!");
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; (i < 5) && !Thread.interrupted(); i++) {
+            double tentativo = Math.random();
+            if (tentativo > 0.5) {
+                boolean catturata = principessaDaCatturare.tentaCattura(this);
+                if (catturata) {
+                    System.out.println("🔥 " + this.getNome() + " ha catturato la principessa " + principessaDaCatturare.getNome() + "!");
+                }
+            }
+            System.out.println(this.getNome() + " sputa fuoco e si libra nell'aria! Gioia immensa, al battito " + (1 + i));
+            
+            try {
+                Thread.sleep(500); // Pausa di mezzo secondo
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }
