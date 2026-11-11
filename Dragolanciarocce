@@ -1,13 +1,33 @@
-public class DLanciaRocce extends Drago {
-    private float pesoRocce;
+public class D_LanciaRocce extends Drago {
+    private Principessa principessaDaCatturare;
 
-    public DLanciaRocce(int idDrago, String nome, String posizione, float pesoRocce) {
-        super(idDrago, nome, posizione);
-        this.pesoRocce = pesoRocce;
+    public D_LanciaRocce(String nome, Principessa principessa) {
+        super(nome);
+        this.principessaDaCatturare = principessa;
     }
 
     @Override
     public void usaPotereMicidiale() {
-        System.out.println(nome + " lancia rocce pesanti " + pesoRocce + " kg!");
+        System.out.println(nome + " lancia massi pesantissimi!");
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; (i < 5) && !Thread.interrupted(); i++) {
+            double tentativo = Math.random();
+            if (tentativo > 0.5) {
+                boolean catturata = principessaDaCatturare.tentaCattura(this);
+                if (catturata) {
+                    System.out.println("🪨 " + this.getNome() + " ha catturato la principessa " + principessaDaCatturare.getNome() + "!");
+                }
+            }
+            System.out.println(this.getNome() + " lancia rocce e si libra nell'aria! Gioia immensa, al battito " + (1 + i));
+            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }
