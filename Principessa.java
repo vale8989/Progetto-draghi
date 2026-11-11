@@ -1,26 +1,26 @@
 public class Principessa {
-    private int idPrincipessa;
     private String nome;
-    private Drago dragoImprigionato; // Associazione 0..1
+    private Drago carceriere;
+    private String stato; // "libera", "prigioniera", "liberata"
 
-    public Principessa(int idPrincipessa, String nome) {
-        this.idPrincipessa = idPrincipessa;
+    public Principessa(String nome) {
         this.nome = nome;
+        this.stato = "libera"; 
     }
 
-    public int getIdPrincipessa() {
-        return idPrincipessa;
+    // Metodo sincronizzato per evitare che due draghi la catturino nello stesso istante
+    public synchronized boolean tentaCattura(Drago drago) {
+        if ("libera".equals(this.stato)) {
+            this.stato = "prigioniera";
+            this.carceriere = drago;
+            return true;
+        }
+        return false;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public Drago getDragoImprigionato() {
-        return dragoImprigionato;
-    }
-
-    public void setDragoImprigionato(Drago dragoImprigionato) {
-        this.dragoImprigionato = dragoImprigionato;
-    }
+    // Getter e Setter
+    public String getNome() { return nome; }
+    public String getStato() { return stato; }
+    public void setStato(String stato) { this.stato = stato; }
+    public Drago getCarceriere() { return carceriere; }
 }
