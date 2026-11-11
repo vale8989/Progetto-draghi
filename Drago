@@ -1,4 +1,4 @@
-public abstract class Drago {
+public abstract class Drago extends thread {
     protected int idDrago;
     protected String nome;
     protected String posizione;
